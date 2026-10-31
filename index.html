@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Horde Orc Hunter: Live Session Roadmap</title>
+<style>
+:root{color-scheme:dark;--bg:#07040a;--card:#120a12;--card2:#1c0f1a;--ink:#f3e9ee;--mute:#a8909c;--line:#3a1a28;--red:#b3122f;--redhi:#ff3b5c;--gold:#d9b36a;--ok:#3ddc84;--okbg:#12301f;--wip:#f0b43c;--wipbg:#3a2c0b;--todo:#b4bdca;--todobg:#262e3a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(1px 1px at 30px 40px,rgba(255,255,255,.6) 0,transparent 100%) 0 0/220px 220px,radial-gradient(1px 1px at 140px 120px,rgba(255,190,205,.5) 0,transparent 100%) 0 0/310px 270px,radial-gradient(1.5px 1.5px at 90px 190px,rgba(255,255,255,.45) 0,transparent 100%) 0 0/270px 330px,radial-gradient(700px 420px at 88% -140px,#5a0f24 0,transparent 70%) no-repeat,radial-gradient(1200px 520px at 15% -220px,#2a0a16 0,var(--bg) 65%) no-repeat,var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+header{position:relative;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end;border-bottom:2px solid var(--red);padding-bottom:12px;box-shadow:0 10px 24px -18px var(--redhi)}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,#ff3b5c,#d9b36a,#ff3b5c,transparent,#ff3b5c,#d9b36a,#ff3b5c,transparent);background-size:200% 100%;animation:sweep 7s linear infinite;pointer-events:none}
+.tag{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--redhi);text-transform:uppercase}
+h1{margin:2px 0 0;font:700 21px/1.25 Georgia,"Times New Roman",serif;letter-spacing:.3px;text-shadow:0 0 18px rgba(255,59,92,.45)}
+header p{margin:3px 0 0;color:var(--mute);font-size:13px}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+button{font-family:inherit}
+.b{border:1px solid var(--line);background:var(--card2);color:var(--ink);border-radius:8px;padding:7px 12px;font-weight:600;font-size:12.5px;cursor:pointer}
+.b:hover{border-color:var(--redhi)}
+.b.p{background:var(--red);border-color:var(--red)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+@media(max-width:820px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi,.card{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.kpi{padding:12px 14px}
+.kpi small{display:block;color:var(--mute);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.kpi b{font-size:22px;font-variant-numeric:tabular-nums}
+.kpi.big{grid-column:span 1}
+.pg{height:7px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:6px}
+.pg i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .25s}
+.card{margin-top:14px;padding:16px}
+h2{margin:0;font-size:15px}
+.sub{margin:2px 0 12px;color:var(--mute);font-size:12px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:760px;font-variant-numeric:tabular-nums}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);padding:8px 10px;border-bottom:1px solid var(--line);background:var(--card2);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:13px}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--card2)}
+.lv{font-weight:700;white-space:nowrap}
+.z small{display:block;color:var(--mute);font-size:11px}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11.5px;font-weight:600;color:#fff;white-space:nowrap}
+.sel{border:0;border-radius:99px;padding:4px 8px;font:600 11.5px inherit;cursor:pointer;appearance:none;text-align:center}
+.sel.todo{background:var(--todobg);color:var(--todo)}.sel.wip{background:var(--wipbg);color:var(--wip)}.sel.ok{background:var(--okbg);color:var(--ok)}
+.num{font-weight:600;white-space:nowrap}
+.hint{color:var(--mute);font-size:11px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:none}
+.ov.on{display:block}
+.dr{position:absolute;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--card);border-left:2px solid var(--red);padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+.dr h3{margin:14px 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--gold)}
+.dr ul{margin:0;padding-left:18px}.dr li{margin:3px 0}
+.dh{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.dh h2{font:700 18px/1.3 Georgia,serif}
+.est{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.est label{display:block;font-size:11px;color:var(--mute)}
+.est input,.hy input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:7px 8px;font:600 14px inherit}
+.res{margin-top:10px;border:1px solid var(--line);background:var(--card2);border-radius:10px;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.res b{font-size:18px;color:var(--gold);font-variant-numeric:tabular-nums}
+.res small{display:block;color:var(--mute);font-size:11px}
+.flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch}
+.node{flex:1 1 130px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--card2);cursor:pointer}
+.node small{color:var(--mute);font-size:11px;display:block}
+.node b{font-size:13px}
+.node.cur{border-color:var(--redhi);box-shadow:0 0 0 1px var(--redhi) inset;background:#2a1417}
+.node.dn{opacity:.65}
+.ar{align-self:center;color:var(--redhi);font-weight:700}
+.tm{font:700 34px ui-monospace,Menlo,Consolas,monospace;color:var(--gold);font-variant-numeric:tabular-nums}
+.cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+.box{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--card2)}
+.box h3{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
+.cnt{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cnt b{font-size:28px;min-width:54px;font-variant-numeric:tabular-nums}
+.anchor{margin-top:12px;border:1px solid var(--gold);background:#241418;border-radius:10px;padding:12px}
+.note{margin:14px 2px 0;color:var(--mute);font-size:12px}
+.mo{display:none;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.7);align-items:center;justify-content:center;padding:16px}
+.mo.on{display:flex}
+.md{width:min(560px,100%);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.md textarea{width:100%;height:180px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px;font:12px ui-monospace,Menlo,monospace}
+.wrap{position:relative;z-index:1}
+body::before{content:"";position:fixed;z-index:0;pointer-events:none;top:-90px;right:-70px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 60% 55%,rgba(60,0,15,.45) 0 9%,transparent 10%),radial-gradient(circle at 40% 68%,rgba(60,0,15,.35) 0 6%,transparent 7%),radial-gradient(circle at 68% 30%,rgba(60,0,15,.3) 0 5%,transparent 6%),radial-gradient(circle at 34% 30%,rgba(255,150,165,.95) 0,rgba(200,30,60,.95) 38%,rgba(110,8,30,.95) 70%,rgba(40,3,12,.95) 100%);box-shadow:0 0 90px 30px rgba(255,59,92,.35),0 0 220px 80px rgba(179,18,47,.25);opacity:.55;animation:moonpulse 7s ease-in-out infinite}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;background-image:radial-gradient(circle,rgba(255,90,110,.9) 0 1.4px,transparent 2px),radial-gradient(circle,rgba(217,179,106,.8) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(255,59,92,.7) 0 1.2px,transparent 2px);background-size:170px 210px,260px 300px,330px 250px;background-position:20px 40px,120px 160px,200px 90px;animation:rise 26s linear infinite}
+@keyframes moonpulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
+@keyframes rise{to{background-position:20px -1010px,120px -1040px,200px -910px}}
+@keyframes sweep{to{background-position:-200% 0}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 1px var(--redhi) inset,0 0 10px rgba(255,59,92,.25)}50%{box-shadow:0 0 0 1px var(--redhi) inset,0 0 22px rgba(255,59,92,.6)}}
+.kpi,.card{background:linear-gradient(160deg,rgba(28,15,26,.96),rgba(10,5,10,.96));box-shadow:0 14px 34px -22px rgba(179,18,47,.9);transition:border-color .2s,box-shadow .2s}
+.kpi:hover,.card:hover{border-color:#8a1c38;box-shadow:0 14px 40px -16px rgba(255,59,92,.55)}
+.card h2::before{content:"◆";color:var(--redhi);font-size:10px;margin-right:8px;vertical-align:2px;text-shadow:0 0 8px var(--redhi)}
+.kpi{position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--redhi),transparent)}
+.kpi b{background:linear-gradient(180deg,#fff,#ff8fa5);-webkit-background-clip:text;background-clip:text;color:transparent}
+th{background:linear-gradient(180deg,#26111f,#1a0c16);color:#caa9b6}
+tbody tr:hover td{background:linear-gradient(90deg,rgba(179,18,47,.28),rgba(179,18,47,.04))}
+.b.p{background:linear-gradient(180deg,#d01f40,#8a0f26);border-color:#ff3b5c;box-shadow:0 0 14px rgba(255,59,92,.35)}
+.b:hover{box-shadow:0 0 12px rgba(255,59,92,.35)}
+.pg i{box-shadow:0 0 10px rgba(255,59,92,.7)}
+.node.cur{animation:glow 2.4s ease-in-out infinite}
+.tm{text-shadow:0 0 16px rgba(217,179,106,.6)}
+.anchor{box-shadow:0 0 0 1px rgba(217,179,106,.25) inset,0 0 26px -8px rgba(217,179,106,.45)}
+.dr{background:linear-gradient(180deg,#1a0c16,#0b060b);box-shadow:-24px 0 60px -20px rgba(255,59,92,.4)}
+.ov{backdrop-filter:blur(3px)}
+@media(max-width:600px){body::before{width:220px;height:220px;top:-70px;right:-60px}}
+@media(prefers-reduced-motion:reduce){body::before,body::after,header::after,.node.cur{animation:none}}
+body::before{translate:calc(var(--mx,0)*-16px) calc(var(--my,0)*-12px);transition:translate .35s ease-out}
+html::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.6) 100%)}
+h1{background:linear-gradient(90deg,#fff 0,#ff9aae 30%,#d9b36a 50%,#ff9aae 70%,#fff 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 14px rgba(255,59,92,.55));animation:sweep 9s linear infinite}
+.card{position:relative}
+.card::before{content:"";position:absolute;left:16px;right:16px;top:0;height:1px;background:linear-gradient(90deg,transparent,#ff3b5c,#d9b36a,#ff3b5c,transparent)}
+@keyframes rev{from{opacity:0;transform:translateY(16px)}}
+.kpi,.card{animation:rev .7s cubic-bezier(.2,.7,.2,1) both}
+.kpis .kpi:nth-child(1){animation-delay:.05s}.kpis .kpi:nth-child(2){animation-delay:.12s}.kpis .kpi:nth-child(3){animation-delay:.19s}.kpis .kpi:nth-child(4){animation-delay:.26s}.kpis .kpi:nth-child(5){animation-delay:.33s}
+section.card:nth-of-type(1){animation-delay:.4s}section.card:nth-of-type(2){animation-delay:.55s}
+.fog{position:fixed;left:-20%;width:140%;height:45vh;z-index:0;pointer-events:none;filter:blur(30px);opacity:.5;background:radial-gradient(ellipse at 30% 50%,rgba(179,18,47,.38),transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(120,10,40,.32),transparent 60%);animation:drift 28s ease-in-out infinite alternate}
+.fog.f1{bottom:-8vh}.fog.f2{bottom:14vh;opacity:.3;animation-duration:40s;animation-direction:alternate-reverse}
+@keyframes drift{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+.bat{position:fixed;left:0;z-index:2;pointer-events:none;opacity:.85;filter:drop-shadow(0 0 6px rgba(255,59,92,.6));animation:fly linear infinite}
+.bat i{display:block;width:100%;height:100%;animation:flap .5s ease-in-out infinite}
+.bat.r{animation-direction:reverse}.bat.r svg{transform:scaleX(-1)}
+@keyframes fly{from{transform:translateX(-12vw) translateY(0)}50%{transform:translateX(50vw) translateY(-5vh)}to{transform:translateX(112vw) translateY(4vh)}}
+@keyframes flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.45)}}
+.sp{position:fixed;z-index:80;width:5px;height:5px;margin:-2px 0 0 -2px;border-radius:50%;background:#ff3b5c;box-shadow:0 0 8px #ff3b5c;pointer-events:none;animation:spark .7s ease-out forwards}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+.ar{animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(4px);opacity:.6}}
+@media(prefers-reduced-motion:reduce){.bat,.fog,.sp{display:none}.kpi,.card,h1,.ar{animation:none}}
+.box input[type=number]{width:100%;background:#0e070d;border:1px solid #4a1a2c;color:var(--ink);border-radius:8px;padding:8px 10px;font:600 14px inherit;outline:0}
+.box input[type=number]:focus{border-color:var(--redhi);box-shadow:0 0 0 3px rgba(255,59,92,.2)}
+.kpi:first-child::after{content:"";position:absolute;right:14px;top:50%;width:58px;height:58px;margin-top:-29px;border-radius:50%;background:conic-gradient(var(--redhi) calc(var(--p,0)*1%),#2a1220 0);-webkit-mask:radial-gradient(circle,transparent 56%,#000 58%);mask:radial-gradient(circle,transparent 56%,#000 58%);filter:drop-shadow(0 0 8px rgba(255,59,92,.6))}
+.hero{display:grid;grid-template-columns:1.2fr 1.4fr auto;gap:16px;align-items:center;padding:16px;margin-bottom:16px;border:1px solid var(--redhi);border-radius:14px;background:radial-gradient(520px 170px at 0 0,rgba(255,59,92,.28),transparent 70%),linear-gradient(100deg,#2a0f1d,#12080f);box-shadow:0 0 34px -10px rgba(255,59,92,.65);cursor:pointer}
+.hz{font:700 20px/1.25 Georgia,serif}
+.hs{color:var(--mute);font-size:12px}
+.hc{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chp{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;border:1px solid #4a1a2c;background:rgba(0,0,0,.28);color:#e8d6de}
+.hbx{text-align:right}.hbx small{display:block;color:var(--mute);font-size:11px;text-transform:uppercase;letter-spacing:.06em}.hbx b{display:block;font-size:22px;color:var(--gold);font-variant-numeric:tabular-nums}.hbx span{font-size:12px;color:var(--redhi);font-weight:600}
+.path{position:relative;display:flex;flex-direction:column;gap:10px;padding-left:30px}
+.path::before{content:"";position:absolute;left:11px;top:14px;bottom:14px;width:2px;background:linear-gradient(180deg,var(--redhi),#4a1428 70%,transparent);box-shadow:0 0 10px rgba(255,59,92,.5)}
+.sc{position:relative;display:grid;grid-template-columns:84px 1.1fr 1.5fr auto;gap:16px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;background:linear-gradient(100deg,rgba(38,14,28,.92),rgba(14,7,13,.92));cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
+.sc:hover{transform:translateX(4px);box-shadow:0 0 24px -8px var(--c);border-color:var(--c)}
+.sc::before{content:"";position:absolute;left:-26px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:#2a1220;border:2px solid #7a1830}
+.sc.wip::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 12px var(--gold)}
+.sc.ok::before{background:var(--ok);border-color:var(--ok);box-shadow:0 0 12px var(--ok)}
+.sc.ok{opacity:.72}
+.lb{text-align:center}.lb small{display:block;font-size:10px;letter-spacing:.14em;color:var(--mute)}.lb b{font:700 22px/1.1 Georgia,serif;color:#fff}
+.zn b{display:block;font-size:14px}.zn small{display:block;color:var(--mute);font-size:11px;margin-bottom:5px}
+.chps{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px}
+.skr{display:flex;align-items:center;gap:10px}
+.skb{position:relative;flex:1;height:8px;border-radius:9px;background:#26111f;overflow:hidden}
+.skb i{position:absolute;top:0;bottom:0;border-radius:9px;background:linear-gradient(90deg,var(--c),rgba(255,255,255,.55))}
+.skr span{font-size:12px;color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+.sgs{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.sg{border:0;background:transparent;color:var(--mute);font:600 11.5px inherit;padding:7px 10px;cursor:pointer;border-right:1px solid var(--line)}
+.sg:last-child{border-right:0}
+.sg.on.todo{background:#2a1c26;color:#e8d6de}.sg.on.wip{background:var(--wipbg);color:var(--wip)}.sg.on.ok{background:var(--okbg);color:var(--ok)}
+.node{position:relative;padding-left:46px}
+.rn{position:absolute;left:10px;top:50%;margin-top:-14px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 13px Georgia,serif;border:1.5px solid #7a1830;background:#1c0f1a;color:var(--redhi)}
+.node.cur .rn{background:var(--redhi);color:#fff;box-shadow:0 0 14px var(--redhi)}
+.node.dn .rn{border-color:var(--ok);color:var(--ok)}
+@media(max-width:820px){.sc{grid-template-columns:70px 1fr}.sc .hb2,.sc .sgs{grid-column:1/-1}.hero{grid-template-columns:1fr}.hbx{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <div class="tag">Blood Moon Edition · WoW Forever</div>
+    <h1>Horde Orc Hunter: Live Roadmap (Lvl 1 - 60)</h1>
+    <p>Profesi: Skinning + Herbalism (1-300) | Ras: Orc (Pasif: Command, Hardiness)</p>
+  </div>
+  <div class="btns"><button class="b" id="bx">Export / Import</button><button class="b" id="br">Reset</button></div>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><small>Progres selesai</small><b id="k1">0%</b><div class="pg"><i id="k1b" style="width:0"></i></div><span class="hint" id="k1s"></span></div>
+  <div class="kpi"><small>Jam farming</small><b id="k2">0</b></div>
+  <div class="kpi"><small>Est. skinning mats</small><b id="k3">0</b></div>
+  <div class="kpi"><small>Est. herbs</small><b id="k4">0</b></div>
+  <div class="kpi"><small>Est. gold</small><b id="k5">0g</b></div>
+</div>
+
+<section class="card">
+  <h2>Level Bracket</h2>
+  <p class="sub">Klik baris untuk membuka detail, kalkulator yield, dan rute. Ubah status lewat tombol di tiap kartu.</p>
+  <div id="hero"></div>
+  <div class="path" id="tb"></div>
+</section>
+
+<section class="card" id="hy">
+  <h2>Mount Hyjal Loop (Lvl 51–60)</h2>
+  <p class="sub">Elderwild → Mourning’s Rest → Malorne’s Retreat → Cradle of Tranquility. Klik zona untuk pindah langkah.</p>
+  <div class="flow" id="flow"></div>
+  <div class="cols">
+    <div class="box"><h3>Timer langkah</h3><div class="tm" id="tm">00:00</div><div class="hint" id="tl"></div>
+      <div class="btns" style="margin-top:8px"><button class="b p" id="ts">Mulai</button><button class="b" id="tn">Langkah berikut</button><button class="b" id="tz">Reset timer</button></div></div>
+    <div class="box"><h3>Deadwood Tribal Beads</h3><div class="cnt"><b id="bc">0</b><button class="b" data-d="beads:-1">-1</button><button class="b" data-d="beads:1">+1</button><button class="b" data-d="beads:5">+5</button></div>
+      <div style="margin-top:8px"><label class="hint">Target turn-in</label><input type="number" id="bt" min="0"></div><div class="pg"><i id="bp" style="width:0"></i></div><div class="hint" id="bs"></div></div>
+    <div class="box"><h3>Death Lotus (drop herb Hyjal)</h3><div class="cnt"><b id="lc">0</b><button class="b" data-d="lotus:-1">-1</button><button class="b" data-d="lotus:1">+1</button></div>
+      <div class="hint" style="margin-top:8px">Putaran selesai: <b id="lp">0</b> · Rata-rata <b id="la">-</b> / putaran</div></div>
+  </div>
+  <div class="anchor"><b>Anchor: Dala Fairmaw</b> (Quartermaster Barkskin Burrow), barat daya Malorne’s Retreat. Titik turn-in Beads dan recipe, termasuk Formula: Enchant Gloves - Lotus Claw (halaman recipe-nya ada di Wowhead Forever, penjualnya belum terbaca). Death Lotus butuh enchant ini di sarung tangan, jadi kamu perlu Enchanting atau enchanter lain. Rute: tiba di Tainted Foothills atau Summit of Eternity (flight point), lalu jalan darat.</div>
+</section>
+
+<p class="note">Catatan: lokasi mob dan node di drawer masih level area. Trainer herbalism dan enchanting diperbarui dari wow-professions.com dan sumber lain (data beta, bisa berubah saat launch). Laju drop per jam adalah asumsi yang bisa kamu ubah. Urutan loop Hyjal dan lokasi Dala Fairmaw berasal dari rencana kamu dan belum terverifikasi karena beta hanya sampai level 30. Verifikasi di game.</p>
+</div>
+
+<div class="ov" id="ov"><div class="dr" id="dr"></div></div>
+<div class="mo" id="mo"><div class="md"><h2>Export / Import</h2><p class="sub">Salin teks untuk backup. Tempel teks lalu tekan Import untuk memulihkan.</p><textarea id="ta"></textarea><div class="btns" style="margin-top:10px"><button class="b p" id="mi">Import</button><button class="b" id="mc">Salin</button><button class="b" id="mx">Tutup</button></div><div class="hint" id="mm"></div></div></div>
+
+<script>
+var C={L:"#b5442b",H:"#2f7d5b",T:"#b8860b",S:"#4f55b8",E:"#7a2e8c"};
+var R=[
+{k:"r1",lv:"1–12",zone:"Durotar & The Barrens",sub:"Area awal Orc",sk:"Pristine Leather",c:C.L,herbs:["Peacebloom","Silverleaf","Earthroot"],s:[1,70],rs:60,rh:90,
+ mobs:["Boar dan Scorpid: Durotar, sekitar Razor Hill","Raptor dan Plainstrider: Barrens utara, dekat Crossroads"],
+ nodes:"Peacebloom dan Silverleaf di tepi jalan dan sungai Durotar; Earthroot di Barrens.",trainer:"Herbalism: Zor’la (Junior, Valley of Trials) sampai skill 75; trainer penuh Jandi di The Drag, Orgrimmar. Skinning: cek kota Horde.",
+ tac:["Pet Growl aktif, pull satu mob per waktu","Aspect of the Hawk saat grinding, Cheetah hanya saat berpindah","Mend Pet di sela pull"],
+ rt:["Orgrimmar → Crossroads (flight path)","Reset vendor: Razor Hill atau Crossroads"]},
+{k:"r2",lv:"12–22",zone:"The Barrens (Upper) & Silverpine",sub:"Perluasan rute",sk:"Pristine Leather",c:C.L,herbs:["Mageroyal","Briarthorn","Stranglekelp"],s:[70,115],rs:60,rh:80,
+ mobs:["Quillboar: Barrens selatan, dekat Razorfen","Raptor: Barrens","Serigala dan Beruang: Silverpine"],
+ nodes:"Mageroyal dan Briarthorn di Barrens dan Silverpine; Stranglekelp di perairan pantai.",trainer:"Skinning dan Herbalism: Orgrimmar atau Undercity.",
+ tac:["Feign Death untuk menjatuhkan aggro saat mob lain mendekati node","Growl pet bergantian dengan Distracting Shot untuk pull ganda","Aspect of the Monkey jika sering dipukul"],
+ rt:["Crossroads → The Sepulcher (flight path, Silverpine)","Reset vendor: Crossroads atau The Sepulcher"]},
+{k:"r3",lv:"22–32",zone:"Ashenvale & Stonetalon",sub:"Kalimdor tengah",sk:"Pristine Hide",c:C.H,herbs:["Bruiseweed","Wild Steelbloom","Kingsblood"],s:[115,170],rs:55,rh:70,
+ mobs:["Beruang dan Saber: Ashenvale","Beast skinnable: Stonetalon"],
+ nodes:"Bruiseweed, Wild Steelbloom, Kingsblood di Ashenvale dan Stonetalon. Ambil Greenhouse Blueprint di fase ini.",trainer:"Expert Herbalism (skill 125): Jandi, Orgrimmar. Enchanting Artisan: Hgarth, Sun Rock Retreat (Stonetalon).",
+ tac:["Pet Bear: Growl lebih sering, kamu burst dari jarak","Feign Death jika Night Elf patrol atau elite mendekat","Aspect of the Cheetah antar node, matikan saat pull"],
+ rt:["Splintertree Post (Ashenvale)","Sun Rock Retreat (Stonetalon)","Reset vendor: Splintertree Post"]},
+{k:"r4",lv:"32–38",zone:"STV Utara (Grom’gol)",sub:"Stranglethorn Vale",sk:"Thick Pristine Hide",c:C.T,herbs:["Fadeleaf","Goldthorn","Khadgar’s Whisker"],s:[170,205],rs:50,rh:60,
+ mobs:["Nesingwary Beasts: Tiger, Panther, Raptor di area Nesingwary’s Expedition"],
+ nodes:"Fadeleaf, Goldthorn, Khadgar’s Whisker tersebar di STV utara. Khadgar’s Whisker banyak dekat jalur pegunungan.",trainer:"Artisan Herbalism (skill 200): Jandi, Orgrimmar, atau Angrun di Grom’gol (data Classic, belum dipastikan untuk Forever).",
+ tac:["Pull satu Tiger atau Panther, pet menahan, kamu Multi-Shot","Feign Death untuk mereset saat dua pemburu liar datang","Mend Pet setelah setiap kill besar"],
+ rt:["Grom’gol Base Camp (flight path)","Reset vendor: Grom’gol"]},
+{k:"r5",lv:"38–45",zone:"Tanaris",sub:"Gurun selatan",sk:"Pristine Scale",c:C.S,herbs:["Purple Lotus","Firebloom"],s:[205,230],rs:45,rh:50,
+ mobs:["Scorpid: Tanaris","Turtle: area pantai Tanaris"],
+ nodes:"Purple Lotus dan Firebloom di Tanaris dan sekitar.",trainer:"Tidak ada trainer di Tanaris atau Searing Gorge. Latih Artisan (skill 200) sebelum berangkat, kalau tidak harus terbang kembali di skill 225.",
+ tac:["Aspect of the Cheetah di gurun luas, tapi matikan saat dekat mob","Pet tank scorpid, kamu serang dari jarak jauh","Feign Death untuk reset aggro di area ramai"],
+ rt:["Gadgetzan (flight path)","Reset vendor: Gadgetzan"]},
+{k:"r6",lv:"45–52",zone:"Feralas & Hinterlands",sub:"Menuju endgame",sk:"Pristine Scale",c:C.S,herbs:["Sungrass","Golden Sansam","Ghost Mushroom"],s:[230,270],rs:45,rh:45,
+ mobs:["Beast skinnable: Feralas dan Hinterlands"],
+ nodes:"Sungrass, Golden Sansam, Ghost Mushroom di Feralas dan Hinterlands; Purple Lotus juga ada di Hinterlands.",trainer:"Kota Horde terdekat.",
+ tac:["Hinterlands bisa ramai pemain Alliance, jaga Feign Death siap","Aspect of the Pack hanya untuk perpindahan antar grup","Persiapkan perjalanan darat menuju Hyjal (tanpa flying mount)"],
+ rt:["Camp Mojache (Feralas)","Revantusk Village (Hinterlands)","Reset vendor: Camp Mojache"]},
+{k:"r7",lv:"51–60",zone:"Mount Hyjal",sub:"Endgame Loop",sk:"High-level Hides / Scales",c:C.E,herbs:["Death Lotus","Dreamfoil","Silversage"],s:[270,300],rs:35,rh:30,
+ mobs:["Furbolgs: Deadwood Tribal Beads dan reputasi Barkskin Burrow","Hyjal Beasts dan Dragonkin: skinning"],
+ nodes:"Death Lotus: bonus drop dari herb apa pun di Hyjal dan butuh enchant Lotus Claw di sarung tangan (perlu Enchanting). Ini dari satu sumber (wow-professions.com), belum dikonfirmasi. Lokasi Dreamfoil dan Silversage belum terverifikasi. Urutan zona dari rencana kamu.",trainer:"Tidak ada trainer baru; pastikan skill 270+ sebelum masuk.",
+ tac:["Pet Growl terus-menerus di pull Furbolg","Feign Death mereset aggro saat dragonkin mendekat node","Aspect of the Hawk untuk grinding, Cheetah di perpindahan loop"],
+ rt:["Flight point Hyjal: Tainted Foothills dan Summit of Eternity","Dala Fairmaw (Malorne’s Retreat) untuk turn-in dan recipe","Akses melalui Darkwhisper Gorge"]}
+];
+var LB={todo:"Belum",wip:"Berjalan",ok:"Selesai"};
+var Z=["Elderwild","Mourning’s Rest","Malorne’s Retreat","Cradle of Tranquility"],ZS=["Zona 1","Zona 2","Zona 3 · Dala Fairmaw","Zona 4"];
+function fresh(){var o={b:{},c:{},h:{beads:0,bt:100,lotus:0,step:0,el:[0,0,0,0],laps:0,lt:0,run:false}};R.forEach(function(r){o.b[r.k]="todo";o.c[r.k]={hrs:0,rs:r.rs,rh:r.rh,ps:0,ph:0}});return o}
+var ST=fresh();
+try{var raw=localStorage.getItem("orc-live");if(raw){var p=JSON.parse(raw);ST=Object.assign(fresh(),p);ST.h=Object.assign(fresh().h,p.h||{});R.forEach(function(r){ST.c[r.k]=Object.assign(fresh().c[r.k],(p.c||{})[r.k]||{})});ST.h.run=false}}catch(e){}
+function save(){try{localStorage.setItem("orc-live",JSON.stringify(ST))}catch(e){}}
+function $(i){return document.getElementById(i)}
+function est(k){var c=ST.c[k];var sk=Math.floor(c.hrs*c.rs),hb=Math.floor(c.hrs*c.rh);return{sk:sk,hb:hb,g:Math.round(sk*c.ps+hb*c.ph)}}
+function stats(){
+  var n=0,w=0,hr=0,sk=0,hb=0,g=0;
+  R.forEach(function(r){var s=ST.b[r.k];if(s==="ok")n++;if(s==="wip")w++;var e=est(r.k);hr+=+ST.c[r.k].hrs||0;sk+=e.sk;hb+=e.hb;g+=e.g});
+  var pc=Math.round(n/R.length*100);
+  $("k1").textContent=pc+"%";document.documentElement.style.setProperty("--p",pc);$("k1b").style.width=pc+"%";$("k1s").textContent=n+" selesai · "+w+" berjalan · "+(R.length-n-w)+" belum";
+  $("k2").textContent=(Math.round(hr*10)/10);$("k3").textContent=sk.toLocaleString("id-ID");$("k4").textContent=hb.toLocaleString("id-ID");$("k5").textContent=g.toLocaleString("id-ID")+"g";
+}
+function table(){
+  var cur=R.filter(function(r){return ST.b[r.k]==="wip"})[0]||R.filter(function(r){return ST.b[r.k]!=="ok"})[0];
+  var chips=function(a){return a.map(function(h){return '<span class="chp">'+h+'</span>'}).join("")};
+  $("hero").innerHTML=cur?'<div class="hero" data-o="'+cur.k+'"><div><div class="tag">Bracket aktif · Lvl '+cur.lv+'</div><div class="hz">'+cur.zone+'</div><div class="hs">'+cur.sub+'</div></div><div class="hc"><span class="pill" style="background:'+cur.c+'">'+cur.sk+'</span>'+chips(cur.herbs)+'</div><div class="hbx"><small>Skill herb</small><b>'+cur.s[0]+' → '+cur.s[1]+'</b><span>Buka detail ›</span></div></div>':'<div class="hero"><div class="hz">Semua bracket selesai</div></div>';
+  $("tb").innerHTML=R.map(function(r){var st=ST.b[r.k],c=ST.c[r.k];
+    var seg=["todo","wip","ok"].map(function(v){return '<button class="sg '+v+(st===v?' on':'')+'" data-st="'+r.k+':'+v+'">'+LB[v]+'</button>'}).join("");
+    return '<div class="sc '+st+'" data-o="'+r.k+'" style="--c:'+r.c+'"><div class="lb"><small>LVL</small><b>'+r.lv+'</b></div><div class="zn"><b>'+r.zone+'</b><small>'+r.sub+'</small><span class="pill" style="background:'+r.c+'">'+r.sk+'</span></div><div class="hb2"><div class="chps">'+chips(r.herbs)+'</div><div class="skr"><div class="skb"><i style="left:'+(r.s[0]/3)+'%;width:'+((r.s[1]-r.s[0])/3)+'%"></i></div><span>'+r.s[0]+' → '+r.s[1]+' · '+(+c.hrs||0)+' j</span></div></div><div class="sgs">'+seg+'</div></div>';
+  }).join("");
+  stats();
+}
+function drawer(k){
+  var r=R.filter(function(x){return x.k===k})[0],c=ST.c[k],li=function(a){return "<ul>"+a.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul>"};
+  $("dr").innerHTML='<div class="dh"><div><div class="tag">Lvl '+r.lv+'</div><h2>'+r.zone+'</h2><span class="pill" style="background:'+r.c+'">'+r.sk+'</span></div><button class="b" id="dx">Tutup</button></div>'+
+  '<h3>Mob dan lokasi</h3>'+li(r.mobs)+'<h3>Herbalism: node dan trainer</h3><p style="margin:0 0 4px">'+r.nodes+'</p><p style="margin:0;color:var(--mute)">'+r.trainer+'</p>'+
+  '<h3>Taktik Hunter</h3>'+li(r.tac)+'<h3>Flight path dan reset vendor (Horde)</h3>'+li(r.rt)+
+  '<h3>Kalkulator yield</h3><div class="est">'+
+  '<div><label>Jam farming</label><input type="number" min="0" step="0.5" data-f="hrs" value="'+c.hrs+'"></div><div><label>Skin / jam (asumsi)</label><input type="number" min="0" data-f="rs" value="'+c.rs+'"></div>'+
+  '<div><label>Herb / jam (asumsi)</label><input type="number" min="0" data-f="rh" value="'+c.rh+'"></div><div><label>Harga skin (gold/unit)</label><input type="number" min="0" step="0.1" data-f="ps" value="'+c.ps+'"></div>'+
+  '<div><label>Harga herb (gold/unit)</label><input type="number" min="0" step="0.1" data-f="ph" value="'+c.ph+'"></div></div>'+
+  '<div class="res"><div><small>'+r.sk+'</small><b id="e1">0</b></div><div><small>Herb terkumpul</small><b id="e2">0</b></div><div><small>Est. gold</small><b id="e3">0g</b></div><div><small>Skill herb</small><b>'+r.s[0]+'→'+r.s[1]+'</b></div></div>'+
+  '<p class="hint">Harga isi manual sesuai Auction House. Kosong = 0.</p>';
+  dr_k=k;ue();$("ov").classList.add("on");
+}
+var dr_k=null;
+function ue(){var e=est(dr_k);$("e1").textContent=e.sk.toLocaleString("id-ID");$("e2").textContent=e.hb.toLocaleString("id-ID");$("e3").textContent=e.g.toLocaleString("id-ID")+"g"}
+function fmt(s){var m=Math.floor(s/60),x=s%60;return (m<10?"0":"")+m+":"+(x<10?"0":"")+x}
+function hy(){
+  var h=ST.h;
+  $("flow").innerHTML=Z.map(function(z,i){return '<div class="node'+(i===h.step?" cur":i<h.step?" dn":"")+'" data-z="'+i+'"><span class="rn">'+(i<h.step?"✓":i+1)+'</span><small>'+ZS[i]+' · '+fmt(h.el[i])+'</small><b>'+z+'</b></div>'+(i<3?'<div class="ar">→</div>':'')}).join("")+'<div class="ar">↺</div>';
+  $("tm").textContent=fmt(h.el[h.step]);$("tl").textContent="Langkah "+(h.step+1)+"/4: "+Z[h.step];$("ts").textContent=h.run?"Jeda":"Mulai";
+  $("bc").textContent=h.beads;$("bt").value=h.bt;var pct=h.bt>0?Math.min(100,Math.round(h.beads/h.bt*100)):0;$("bp").style.width=pct+"%";$("bs").textContent=pct+"% dari target";
+  $("lc").textContent=h.lotus;$("lp").textContent=h.laps;$("la").textContent=h.laps?fmt(Math.round(h.lt/h.laps)):"-";
+}
+function next(){var h=ST.h;if(h.step<3){h.step++}else{h.laps++;h.lt+=h.el.reduce(function(a,b){return a+b},0);h.el=[0,0,0,0];h.step=0}save();hy()}
+var tick=0;setInterval(function(){if(ST.h.run){ST.h.el[ST.h.step]++;hy();if(++tick%5===0)save()}},1000);
+document.addEventListener("click",function(e){
+  var t=e.target;
+  var sb=t.closest("[data-st]");if(sb){var a2=sb.getAttribute("data-st").split(":");ST.b[a2[0]]=a2[1];save();table();return}
+  if(t.closest("[data-s]"))return;
+  var o=t.closest("[data-o]");if(o){drawer(o.getAttribute("data-o"));return}
+  if(t.id==="dx"||t.id==="ov"){$("ov").classList.remove("on");table();return}
+  var z=t.closest("[data-z]");if(z){ST.h.step=+z.getAttribute("data-z");save();hy();return}
+  var d=t.closest("[data-d]");if(d){var a=d.getAttribute("data-d").split(":");ST.h[a[0]]=Math.max(0,ST.h[a[0]]+(+a[1]));save();hy();return}
+  if(t.id==="ts"){ST.h.run=!ST.h.run;save();hy()}
+  if(t.id==="tn")next();
+  if(t.id==="tz"){ST.h.el=[0,0,0,0];ST.h.step=0;ST.h.run=false;save();hy()}
+  if(t.id==="bx"){$("ta").value=JSON.stringify(ST);$("mm").textContent="";$("mo").classList.add("on")}
+  if(t.id==="mx"||t.id==="mo")$("mo").classList.remove("on");
+  if(t.id==="mc"){$("ta").select();try{document.execCommand("copy");$("mm").textContent="Disalin."}catch(x){$("mm").textContent="Pilih teks lalu salin manual."}}
+  if(t.id==="mi"){try{var p=JSON.parse($("ta").value);if(!p.b||!p.c||!p.h)throw 0;ST=p;ST.h.run=false;save();table();hy();$("mm").textContent="Import berhasil."}catch(x){$("mm").textContent="Format tidak valid."}}
+  if(t.id==="br"&&confirm("Reset semua progres dan data?")){ST=fresh();save();table();hy()}
+});
+document.addEventListener("change",function(e){
+  var s=e.target.getAttribute&&e.target.getAttribute("data-s");
+  if(s){ST.b[s]=e.target.value;save();table()}
+  if(e.target.id==="bt"){ST.h.bt=Math.max(0,+e.target.value||0);save();hy()}
+});
+document.addEventListener("input",function(e){
+  var f=e.target.getAttribute&&e.target.getAttribute("data-f");
+  if(f&&dr_k){ST.c[dr_k][f]=Math.max(0,+e.target.value||0);save();ue();stats()}
+});
+table();hy();
+(function(){
+if(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+var d=document,b=d.body;
+["f1","f2"].forEach(function(c){var f=d.createElement("div");f.className="fog "+c;b.appendChild(f)});
+var P='<svg viewBox="0 0 64 28" width="100%" height="100%"><path fill="#12050a" d="M32 6L28 10Q20 4 2 8Q8 12 9 20Q14 15 19 18Q23 13 28 16L32 24L36 16Q41 13 45 18Q50 15 55 20Q56 12 62 8Q44 4 36 10Z"/></svg>';
+for(var i=0;i<6;i++){var e=d.createElement("div"),w=28+Math.random()*30;e.className="bat"+(i%2?" r":"");e.style.cssText="top:"+(5+Math.random()*60)+"vh;width:"+w+"px;height:"+(w*.44)+"px;animation-duration:"+(20+Math.random()*18)+"s;animation-delay:-"+(Math.random()*30)+"s";e.innerHTML="<i>"+P+"</i>";b.appendChild(e)}
+var raf=0;d.addEventListener("mousemove",function(ev){if(raf)return;raf=requestAnimationFrame(function(){raf=0;var s=d.documentElement.style;s.setProperty("--mx",(ev.clientX/innerWidth-.5)*2);s.setProperty("--my",(ev.clientY/innerHeight-.5)*2)})});
+d.addEventListener("click",function(ev){for(var k=0;k<9;k++){var s=d.createElement("span"),a=Math.PI*2*k/9+Math.random()*.5,r=24+Math.random()*30;s.className="sp";s.style.left=ev.clientX+"px";s.style.top=ev.clientY+"px";s.style.setProperty("--dx",Math.cos(a)*r+"px");s.style.setProperty("--dy",Math.sin(a)*r+"px");b.appendChild(s);(function(n){setTimeout(function(){n.remove()},700)})(s)}});
+})();
+</script>
+</body>
+</html>
